@@ -28,6 +28,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'about' %}">Tentang</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'student_index' %}">Mahasiswa</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -36,6 +39,20 @@
     <!-- Content Section -->
     <div class="container mt-4">
         {% block content %}{% endblock %}
+    </div>
+
+    <!-- Flash Messages -->
+    <div class="container mt-4">
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
 
     {% bootstrap_javascript %}
