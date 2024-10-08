@@ -5,3 +5,17 @@
 body{
     background-color: violet;
 }
+
+.flash-messages {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1050; /* Make sure it appears on top */
+    width: auto;
+}
+
+.flash-messages .alert {
+    margin-bottom: 10px;
+    min-width: 300px;
+    max-width: 400px;
+}

@@ -36,11 +36,6 @@
         </div>
     </nav>
 
-    <!-- Content Section -->
-    <div class="container mt-4">
-        {% block content %}{% endblock %}
-    </div>
-
     <!-- Flash Messages -->
     <div class="container mt-4">
         {% if messages %}
@@ -54,6 +49,13 @@
             </div>
         {% endif %}
     </div>
+
+    <!-- Content Section -->
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
+
+    
 
     {% bootstrap_javascript %}
 </body>
