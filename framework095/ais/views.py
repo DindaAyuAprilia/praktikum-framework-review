@@ -2,8 +2,49 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Students
 from django.contrib import messages
 from .forms import StudentsForm
-from django.http import JsonResponse
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse, HttpResponseForbidden
+from .decorators import group_required
+
+# * DASHBOARD
+@login_required
+def dashboard(request):
+    user = request.user
+    if user.groups.filter(name='Admin').exists():
+        return redirect('dashboard_admin')
+    elif user.groups.filter(name='Student').exists():
+        return redirect('dashboard_student')
+    elif user.groups.filter(name='Teacher').exists():
+        return redirect('dashboard_teacher')
+    
+    return HttpResponseForbidden("You do not have permission to access this page.")
+
+@login_required
+def dashboard_admin(request):
+    return render(request, 'dashboard/admin.html')
+
+@login_required
+def dashboard_student(request):
+    return render(request, 'dashboard/student.html')
+
+@login_required
+def dashboard_teacher(request):
+    return render(request, 'dashboard/teacher.html')
+
+@group_required('Admin')
+def dashboard_admin(request):
+    return render(request, 'dashboard/admin.html')
+
+@group_required('Student')
+def dashboard_student(request):
+    return render(request, 'dashboard/student.html')
+
+@group_required('Teacher')
+def dashboard_teacher(request):
+    return render(request, 'dashboard/teacher.html')
+
+
 
 # Create your views here.
 def homepage(request):
