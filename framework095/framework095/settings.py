@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ais',
     'django_bootstrap5',
-    'django_seed' # Seeder
+    'django_seed', # Seeder
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -84,6 +85,9 @@ DATABASES = {
         'PASSWORD': '', # Biasanya password default di XAMPP kosong (tidak diisi)
         'HOST': '127.0.0.1', # Host MySQL di XAMPP (localhost)
         'PORT': '3306',
+        'OPTIONS': {
+            'ssl': {'ssl_disabled': True},
+        },
     }
 }
 
